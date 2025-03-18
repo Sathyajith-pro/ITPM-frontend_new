@@ -1,25 +1,30 @@
 import { useState } from "react";
 
-export default function ImageSlider(props){
+export default function ImageSlider(props) {
+    const images = props.images;
+    const [selectedImage, setSelectedImage] = useState(images[0]);
+    
+    return (
+        <div className="w-full flex flex-col items-center  ">
+            <img 
+                src={selectedImage} 
+                alt="product" 
+                className="w-full h-96 object-contain "
+            />
 
-const images = props.images;
-console.log(images);
+            {/* Selected Image Thumbnails */}
 
-const [selectedImage,setSelectImage] = useState(images[0])
-return(
-    <div className="w-full h-full mt-2 flex flex-col items-center  ">
-        <img src={selectedImage} alt="product" className="w-full h-[700px] object-cover "/>
-        <div className="w-full h-[150px] flex justify-center mt-[20px] ">
-            {
-                images.map((image,index)=>{
-                    return<img key={index} src={image} alt = "product" className={`w-[100px] h-[100px] object-cover cursor-pointer mr-[3px] ${image==selectedImage && " border border-accent"}`} onClick={
-                       ()=>{
-                        setSelectImage(image);
-                       } 
-                    }/>
-                })
-            }
+            {/*<div className="w-full flex justify-center mt-4 overflow-x-auto">
+                {images.map((image, index) => (
+                    <img 
+                        key={index} 
+                        src={image} 
+                        alt="product thumbnail" 
+                        className={`w-20 h-20 object-cover cursor-pointer mx-1 ${image === selectedImage ? "border-2 border-accent" : "border border-gray-200"}`} 
+                        onClick={() => setSelectedImage(image)} 
+                    />
+                ))}
+            </div>*/}
         </div>
-    </div>
-)
+    );
 }

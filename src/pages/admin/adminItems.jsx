@@ -61,6 +61,7 @@ export default function AdminItemsPage() {
               <th className="p-3 border">Price ($)</th>
               <th className="p-3 border">Category</th>
               <th className="p-3 border">Dimension</th>
+              <th className="p-3 border">date</th>
               <th className="p-3 border">Availability</th>
               <th className="p-3 border">Actions</th>
             </tr>
@@ -73,6 +74,7 @@ export default function AdminItemsPage() {
                 <td className="p-3 border text-center">${product.price.toFixed(2)}</td>
                 <td className="p-3 border text-center">{product.category}</td>
                 <td className="p-3 border text-center">{product.dimension}</td>
+                <td className="p-3 border text-center">{product.dateAdded}</td>
                 <td className="p-3 border text-center">
                   {product.availability ? (
                     <span className="text-green-600 font-semibold">Available</span>

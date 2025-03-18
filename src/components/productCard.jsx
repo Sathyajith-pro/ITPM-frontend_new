@@ -14,16 +14,19 @@ export default function ProductCard({ item }) {
             <div  className="mt-4 ">
                 <h2 className="text-xl font-bold text-gray-800">{item.name}</h2>
                 <p className="text-gray-500">{item.category}</p>
-                <p className="text-gray-700 mt-2">{item.description}</p>
+                <p className="text-gray-700 mt-2">{item.dateAdded}</p>
+                <p className="text-gray-700 mt-2">{item.timeAdded}</p>
 
                 {/* Price & Availability */}
                 <div className="flex items-center justify-between mt-3">
-                    <span className="text-lg font-semibold text-green-600">
-                         {item.price}
+                    <span className="text-lg font-semibold text-gray-500 ">
+                         LKR{item.price}upwords
                     </span>
-                    <span className={`text-sm px-3 py-1 rounded-full ${item.availability ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
-                        {item.availability ? "In Stock" : "Out of Stock"}
-                    </span>
+
+                   {/* <span className={`text-sm px-3 py-1 rounded-full ${item.availability ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'}`}>
+                        {item.availability ? "Available" : "Stopped"}
+                    </span>*/}
+                    
                 </div>
 
                 {/* Add to Cart Button */}
