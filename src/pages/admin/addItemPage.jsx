@@ -7,15 +7,16 @@ import mediaUpload from "../../utils/mediaUpload";
 export default function AddItemPage() {
   const [productKey, setProductKey] = useState("");
   const [productName, setProductName] = useState("");
-  const [productPrice, setProductPrice] = useState(0);
-  const [productCategory, setProductCategory] = useState("Audio");
+  const [productPrice, setProductPrice] = useState("");
+  const [eventDate, setEventDate] = useState("");
+  const [eventTime, setEventTime] = useState("");
+  const [productCategory, setProductCategory] = useState("concert");
   const [productDimension, setProductDimension] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productImages,setProductImages] = useState([]);
   const navigate = useNavigate();
 
   async function handleAddItem() {
-    console.log(productImages)
     const promises= []
 
     for(let i=0; i<productImages.length;i++){
@@ -31,7 +32,7 @@ export default function AddItemPage() {
     }
 
    
-     console.log( productKey,productName,productPrice,productCategory,productDimension,productDescription);
+      console.log( productKey,productName,productPrice,productCategory,productDimension,productDescription);
     const token = localStorage.getItem("token")
   
 
@@ -54,6 +55,8 @@ export default function AddItemPage() {
             name:productName,
             price:productPrice,
             category:productCategory,
+            dateAdded:eventDate,
+            timeAdded:eventTime,
             description:productDescription,
             dimension:productDimension,
             image : imageUrls  //transfer images to backend
@@ -77,63 +80,100 @@ export default function AddItemPage() {
 
   return (
     <div className="w-full h-full flex flex-col items-center p-4">
-      <h1 className="text-xl font-bold mb-4">Add Items</h1>
-      <div className="w-[400px] border p-4 flex flex-col gap-3 rounded-lg shadow-md">
-        <input
-          value={productKey}
-          type="text"
-          placeholder="Product Key"
-          onChange={(e) => setProductKey(e.target.value)}
-          className="border p-2 w-full rounded"
-        />
-        <input
-          type="text"
-          placeholder="Product Name"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          className="border p-2 w-full rounded "
-        />
-        <input
-          onChange={(e) => setProductPrice(e.target.value)}
-          value={productPrice}
-          type="number"
-          placeholder="Product Price"
-          className="border p-2 w-full rounded"
-        />
-        <select
-          onChange={(e) => setProductCategory(e.target.value)}
-          value={productCategory}
-          className="border p-2 w-full rounded"
-        >
-          <option value="Audio">Audio</option>
-          <option value="Light">Light</option>
-        </select>
-        <input
-          onChange={(e) => setProductDimension(e.target.value)}
-          value={productDimension}
-          type="text"
-          placeholder="Product Dimensions"
-          className="border p-2 w-full rounded"
-        />
-        <input
-          onChange={(e) => setProductDescription(e.target.value)}
-          value={productDescription}
-          type="text"
-          placeholder="Product Description"
-          className="border p-2 w-full rounded"
-        />
-        <input type="file" multiple onChange={(e)=>{setProductImages(e.target.files)}} className="w-full p-2 border rounded" />
-        <button
-          onClick={handleAddItem}
-          className="bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600"
-        >
-          Add
-        </button>
-        <button onClick ={()=>{navigate("/admin/items")}} className="bg-red-600 text-white p-2 w-full rounded hover:bg-red-700"
-        >
-          Cancel
-        </button>
-      </div>
+    <h1 className="text-lg font-bold mb-4">Add Items</h1>
+    <div className="w-[400px] border p-4 flex flex-col items-center gap-2 rounded-lg shadow-md ">
+      <input 
+        type="text"
+        placeholder="Event Key"
+        value={productKey}
+        onChange={(e) => setProductKey(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+      <input
+        type="text"
+        placeholder="Event Name"
+        value={productName}
+        onChange={(e) => setProductName(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+      <input
+        type="number"
+        placeholder="Product Price"
+        value={productPrice}
+        onChange={(e) => setProductPrice(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+
+
+   <input
+        type="text"
+        placeholder="Event Date"
+        value={eventDate}
+        onChange={(e) => setEventDate(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+
+<input
+        type="text"
+        placeholder="Event Time"
+        value={eventTime}
+        onChange={(e) => setEventTime(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+
+
+
+
+
+
+
+      <select
+        value={productCategory}
+        onChange={(e) => setProductCategory(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      >
+        <option value="Concert">Concert</option>
+        <option value="Theratre">Theratre</option>
+        <option value="Family & Others">Family & Others</option>
+      </select>
+      <input
+        type="text"
+        placeholder="Event "
+        value={productDimension}
+        onChange={(e) => setProductDimension(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+      <input
+        type="text"
+        placeholder="Event Description"
+        value={productDescription}
+        onChange={(e) => setProductDescription(e.target.value)}
+        className="w-full p-2 border rounded placeholder-gray-500"
+      />
+      <input
+        type="file"
+        multiple
+        onChange={(e) => {
+          setProductImages(e.target.files);
+        }}
+        className="w-full p-2 border rounded "
+      />
+      <button
+        onClick={handleAddItem}
+        className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+      >
+        Add
+      </button>
+      <button
+        onClick={() => {
+          navigate("/admin/items");
+        }}
+        className="w-full p-2 bg-red-500 text-white rounded hover:bg-red-600"
+      >
+        Cancel
+      </button>
     </div>
+  </div>
   );
+  
 }

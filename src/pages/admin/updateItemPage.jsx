@@ -11,6 +11,8 @@ export default function UpdateItemPage() {
   const [productKey, setProductKey] = useState(location.state.key);
   const [productName, setProductName] = useState(location.state.name);
   const [productPrice, setProductPrice] = useState(location.state.price);
+  const [eventDate, setEventDate] = useState(location.state.dateAdded);
+  const [eventTime, setEventTime] = useState(location.state.timeAdded);
   const [productCategory, setProductCategory] = useState(location.state.category);
   const [productDimension, setProductDimension] = useState(location.state.dimension);
   const [productDescription, setProductDescription] = useState(location.state.description);
@@ -40,7 +42,7 @@ export default function UpdateItemPage() {
           updatingImages = await Promise.all(promises);  //update new images
     }
     
-    console.log( productKey,productName,productPrice,productCategory,productDimension,productDescription);
+    console.log( productKey,productName,productPrice,productCategory,productDimension,productDescription,eventTime,eventDate);
     const token = localStorage.getItem("token")
   
 
@@ -53,6 +55,8 @@ export default function UpdateItemPage() {
             category:productCategory,
             description:productDescription,
             dimension:productDimension,
+            dateAdded:eventDate,
+            timeAdded:eventTime,
             image : updatingImages
         },{
             headers :{
@@ -81,44 +85,69 @@ export default function UpdateItemPage() {
           onChange={(e) => setProductKey(e.target.value)}
           value={productKey}
           type="text"
-          placeholder="Product Key"
-          className="border p-2 w-full rounded"
+          placeholder="Event Key"
+          className="border p-2 w-full rounded  placeholder-gray-500"
         />
         <input
           onChange={(e) => setProductName(e.target.value)}
           value={productName}
           type="text"
-          placeholder="Product Name"
-          className="border p-2 w-full rounded"
+          placeholder="Event Name"
+          className="border p-2 w-full rounded  placeholder-gray-500"
         />
         <input
           onChange={(e) => setProductPrice(e.target.value)}
           value={productPrice}
           type="number"
-          placeholder="Product Price"
-          className="border p-2 w-full rounded"
+          placeholder="Event Price"
+          className="border p-2 w-full rounded  placeholder-gray-500"
         />
+
+
+        <input
+          onChange={(e) => setEventDate(e.target.value)}
+          value={eventDate}
+          type="text"
+          placeholder="Event Date"
+          className="border p-2 w-full rounded  placeholder-gray-500"
+        />
+
+
+        <input
+          onChange={(e) => setEventTime(e.target.value)}
+          value={eventTime}
+          type="text"
+          placeholder="Event Time"
+          className="border p-2 w-full rounded  placeholder-gray-500"
+        />
+
+
+
+
+
+
         <select
           onChange={(e) => setProductCategory(e.target.value)}
           value={productCategory}
-          className="border p-2 w-full rounded"
+          className="border p-2 w-full rounded  placeholder-gray-500"
         >
-          <option value="Audio">Audio</option>
-          <option value="Light">Light</option>
+         <option value="Concert">Concert</option>
+        <option value="Theratre">Theratre</option>
+        <option value="Family & Others">Family & Others</option>
         </select>
         <input
           onChange={(e) => setProductDimension(e.target.value)}
           value={productDimension}
           type="text"
-          placeholder="Product Dimensions"
-          className="border p-2 w-full rounded"
+          placeholder="Event Venue"
+          className="border p-2 w-full rounded  placeholder-gray-500"
         />
         <textarea
           onChange={(e) => setProductDescription(e.target.value)}
           value={productDescription}
           type="text"
-          placeholder="Product Description"
-          className="border p-2 w-full rounded"
+          placeholder="Event Description"
+          className="border p-2 w-full rounded  placeholder-gray-500"
         />
         <input type="file" multiple onChange={(e)=>{setProductImages(e.target.files)}} className="w-full p-2 border rounded" />
         <button
